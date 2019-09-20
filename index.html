@@ -18,6 +18,7 @@
 
 <script src="lib/jquery/jquery.js"></script>
 <script src="js/zui.min.js"></script>
+<script src="js/mustache.js" type="text/javascript" charset="utf-8"></script>
 <!--<script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>-->
 <script src="js/underscore-min.js"></script>
 <script type="text/javascript" src="http://api.map.baidu.com/api?v=3.0&ak=LTxUaMMGw5ScN9D6zKZHD8zq4wG28jS1">
@@ -59,23 +60,7 @@
                     <i class="icon icon-list"></i>
                     <span class="title">视频</span>
                 </div>
-                <div class="panel-body">
-                    <style type="text/css">
-                        .main-wrap{
-                            margin: 0 auto;
-                            min-width: 320px;
-                            max-width: 640px;
-                        }
-
-                        .main-wrap video{
-                            width: 100%;
-                        }
-                    </style>
-                    <div class="remove_node ui_cell A3129B557FD3">
-                        <video width="100%" controls="">
-                            <source src="video/movie.ogg" type="video/ogg" />
-                        </video>
-                    </div>
+                <div class="panel-body rili_video">
 
                 </div>
             </div>
@@ -86,32 +71,8 @@
                     <i class="icon icon-list"></i>
                     <span class="title">情绪分析</span>
                 </div>
-                <div class="panel-body no-padding">
-                    <div class="list-group">
-                        <section class="Confirm">
+                <div class="panel-body no-padding motion_analysis">
 
-                            <div class="Confirm-Header">
-                                <!--<a class="Confirm-Header-Button Confirm-Header-Button_Close" href="javascript: void(0)"></a>-->
-                                <!--<a class="Confirm-Header-Button Confirm-Header-Button_Minimize" href="javascript: void(0)"></a>-->
-                                <!--<a class="Confirm-Header-Button Confirm-Header-Button_Maximize" href="javascript: void(0)"></a>-->
-                                <h1 class="Confirm-Header-Title"></h1>
-                            </div>
-
-                            <div class="Confirm-Body">
-                                <figure class="Boi">
-                                    <div class="Boi-Blush Boi-Blush_L"></div>
-                                    <div class="Boi-Blush Boi-Blush_R"></div>
-                                    <div class="Boi-Eye Boi-Eye_L"></div>
-                                    <div class="Boi-Eye Boi-Eye_R"></div>
-                                    <div class="Boi-Mouth"></div>
-                                </figure>
-                                <a style="margin-left: -200px;margin-top: 0px" class="Confirm-Body-Button Confirm-Body-Button_Cancel" href="javascript: void(0)"></a>
-                                <a style="margin-right: -200px;" class="Confirm-Body-Button Confirm-Body-Button_Delete" href="javascript: void(0)"></a>
-                            </div>
-                        </section>
-
-                        <script src="js/script.js"></script>
-                    </div>
                 </div>
             </div>
         <div class="resize-handle resize-horizontal"><i class="icon icon-resize-h"></i></div><div class="resize-handle resize-vertical"><i class="icon icon-resize-v"></i></div></div>
@@ -121,11 +82,7 @@
                     <i class="icon icon-table"></i>
                     <span class="title">分析结果描述</span>
                 </div>
-                <div class="panel-body no-padding">
-                    <p>办公室场景</p>
-                    <p>安全指数：1</p>
-                    <p>行为分析：人们在娱乐</p>
-                    <table class="table"></table>
+                <div class="panel-body no-padding analysis_result">
                 </div>
             </div>
         <div class="resize-handle resize-horizontal"><i class="icon icon-resize-h"></i></div><div class="resize-handle resize-vertical"><i class="icon icon-resize-v"></i></div></div>
@@ -146,182 +103,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="panel-body">
-                    <div data-id="2A851661" class="2A851661"><style>
-                        .chart {
-                            height: 200px;
-                            margin: 0px;
-                            padding: 0px;
-                        }
-                        h5 {
-                            margin-top: 30px;
-                            font-weight: bold;
-                        }
-                        h5:first-child {
-                            margin-top: 15px;
-                        }
-                    </style>
-                        <div class="mui-content-padded">
-                            <h5></h5>
-
-                            <div class="chart" id="myChart" _echarts_instance_="1568982951108" style="-webkit-tap-highlight-color: transparent; user-select: none; background-color: rgba(0, 0, 0, 0);"><div style="position: relative; overflow: hidden; width: 300px; height: 200px;"><div data-zr-dom-id="bg" class="zr-element" style="position: absolute; left: 0px; top: 0px; width: 300px; height: 200px; user-select: none;"></div><canvas width="300" height="200" data-zr-dom-id="0" class="zr-element" style="position: absolute; left: 0px; top: 0px; width: 300px; height: 200px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></canvas><canvas width="300" height="200" data-zr-dom-id="1" class="zr-element" style="position: absolute; left: 0px; top: 0px; width: 300px; height: 200px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></canvas><canvas width="300" height="200" data-zr-dom-id="_zrender_hover_" class="zr-element" style="position: absolute; left: 0px; top: 0px; width: 300px; height: 200px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></canvas></div></div>
-                        </div>
-                        <script>
-                            function createRandomItemStyle() {
-                                return {
-                                    normal: {
-                                        color: 'rgb(' + [
-                                            Math.round(Math.random() * 160),
-                                            Math.round(Math.random() * 160),
-                                            Math.round(Math.random() * 160)
-                                        ].join(',') + ')'
-                                    }
-                                };
-                            }
-                            var getOption = function () {
-                                var option = {
-                                    title: {
-                                        text: '标签',
-                                        link: 'http://'
-                                    },
-                                    tooltip: {
-                                        show: true
-                                    },
-                                    series: [{
-                                        name: '标签',
-                                        type: 'wordCloud',
-                                        size: ['80%', '80%'],
-                                        textRotation : [0, 45, 90, -45],
-                                        textPadding: 0,
-                                        autoSize: {
-                                            enable: true,
-                                            minSize: 14
-                                        },
-                                        data: [
-                                            {
-                                                name: "Sam S Club",
-                                                value: 10000,
-                                                itemStyle: {
-                                                    normal: {
-                                                        color: 'black'
-                                                    }
-                                                }
-                                            },
-                                            {
-                                                name: "Macys",
-                                                value: 6181,
-                                                itemStyle: createRandomItemStyle()
-                                            },
-                                            {
-                                                name: "Amy Schumer",
-                                                value: 4386,
-                                                itemStyle: createRandomItemStyle()
-                                            },
-                                            {
-                                                name: "Jurassic World",
-                                                value: 4055,
-                                                itemStyle: createRandomItemStyle()
-                                            },
-                                            {
-                                                name: "Charter Communications",
-                                                value: 2467,
-                                                itemStyle: createRandomItemStyle()
-                                            },
-                                            {
-                                                name: "Chick Fil A",
-                                                value: 2244,
-                                                itemStyle: createRandomItemStyle()
-                                            },
-                                            {
-                                                name: "Planet Fitness",
-                                                value: 1898,
-                                                itemStyle: createRandomItemStyle()
-                                            },
-                                            {
-                                                name: "Pitch Perfect",
-                                                value: 1484,
-                                                itemStyle: createRandomItemStyle()
-                                            },
-                                            {
-                                                name: "Express",
-                                                value: 1112,
-                                                itemStyle: createRandomItemStyle()
-                                            },
-                                            {
-                                                name: "Home",
-                                                value: 965,
-                                                itemStyle: createRandomItemStyle()
-                                            },
-                                            {
-                                                name: "Johnny Depp",
-                                                value: 847,
-                                                itemStyle: createRandomItemStyle()
-                                            },
-                                            {
-                                                name: "Lena Dunham",
-                                                value: 582,
-                                                itemStyle: createRandomItemStyle()
-                                            },
-                                            {
-                                                name: "Lewis Hamilton",
-                                                value: 555,
-                                                itemStyle: createRandomItemStyle()
-                                            },
-                                            {
-                                                name: "KXAN",
-                                                value: 550,
-                                                itemStyle: createRandomItemStyle()
-                                            },
-                                            {
-                                                name: "Mary Ellen Mark",
-                                                value: 462,
-                                                itemStyle: createRandomItemStyle()
-                                            },
-                                            {
-                                                name: "Farrah Abraham",
-                                                value: 366,
-                                                itemStyle: createRandomItemStyle()
-                                            },
-                                            {
-                                                name: "Rita Ora",
-                                                value: 360,
-                                                itemStyle: createRandomItemStyle()
-                                            },
-                                            {
-                                                name: "Serena Williams",
-                                                value: 282,
-                                                itemStyle: createRandomItemStyle()
-                                            },
-                                            {
-                                                name: "NCAA baseball tournament",
-                                                value: 273,
-                                                itemStyle: createRandomItemStyle()
-                                            },
-                                            {
-                                                name: "Point Break",
-                                                value: 265,
-                                                itemStyle: createRandomItemStyle()
-                                            }
-                                        ]
-                                    }]
-                                };
-
-                                return option;
-                            };
-                            var byId = function (id) {
-                                return document.getElementById(id);
-                            };
-                            var myChart = echarts.init(byId('myChart'));
-                            myChart.setOption(getOption());
-                            byId("myChart").addEventListener('tap', function () {
-                                var url = this.getAttribute('data-url');
-                                if (window.plus) {
-                                    plus.runtime.openURL(url);
-                                } else {
-                                    window.open(url);
-                                }
-                            }, false);
-                        </script></div>
+                <div class="panel-body rili_tag">
                 </div>
             </div>
         <div class="resize-handle resize-horizontal"><i class="icon icon-resize-h"></i></div><div class="resize-handle resize-vertical"><i class="icon icon-resize-v"></i></div></div>
@@ -364,16 +146,6 @@
     $('#dashboard').dashboard({draggable: true});
 </script></div>
 
-<script type="text/javascript">
-    //todo 解析绑定关系，参考dist\js\ajaxParse.js，不过需要改进，改为多
-    //绑定关系，还有checked, selected 或者 disabled 使用prop() 参考图片：attr_prop.png
-//    _.each(bind_config, function(key, value){
-//        _.each(value["binds"], function(){
-////            checked, selected 或者 disabled 使用prop()
-//            $("." + value["comp_id"]).attr();
-//        });
-//
-//    });
-</script>
+<script type="text/javascript" src="js/init.js"></script>
 </body>
 </html>
