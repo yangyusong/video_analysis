@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+  <head>
+    <title></title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="lib/jqueryui/jquery-ui.min.css">
+    <!--<link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="css/zui.min.css">
+    <link rel="stylesheet" href="lib/calendar/zui.calendar.css">
+    <link rel="stylesheet" href="lib/datatable/zui.datatable.css">
+    <link rel="stylesheet" href="lib/datetimepicker/datetimepicker.css">
+    <link rel="stylesheet" href="lib/kindeditor/kindeditor.css">
+  </head>
+  <body>
+
+    <script src="lib/jquery/jquery.js"></script>
+    <script src="js/zui.min.js"></script>
+    <!--<script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>-->
+    <script src="js/underscore-min.js"></script>
+    <script src="lib/calendar/zui.calendar.min.js"></script>
+    <script src="lib/datatable/zui.datatable.js"></script>
+    <script src="lib/datetimepicker/datetimepicker.min.js"></script>
+    <script src="lib/kindeditor/kindeditor.min.js"></script>
+    <script src="lib/jqueryui/jquery-ui.min.js"></script>
+
+    <script src="lib/selectable/zui.selectable.min.js"></script>
+
+    <style>
+      #messages > .tile.active {
+        background: blue;
+        color: #fff;
+      }
+    </style>
+
+    <div id="messages">
+      <div class="tile" data-id="1">1</div>
+      <div class="tile" data-id="2">2</div>
+      <div class="tile" data-id="3">3</div>
+    </div>
+
+    <script>
+      $('#messages').selectable({
+        selector: '.tile',
+        select: function(e) {
+          console.log('你选取了方块 #' + e.id + '，共选择了 ' + e.selected.length + ' 个。');
+        }
+      });
+    </script>
+  </body>
+</html>

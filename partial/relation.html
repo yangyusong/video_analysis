@@ -1,0 +1,128 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <meta name="description" content="">
+    <link rel="stylesheet" href="demos.css">
+    <!--<link rel="stylesheet" href="lib/jqueryui/jquery-ui.min.css">-->
+    <!--<script src="lib/jquery/jquery.js"></script>-->
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=3.0&ak=LTxUaMMGw5ScN9D6zKZHD8zq4wG28jS1">
+    </script>
+    <script src="js/mapv.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.js"></script>
+    <link rel="stylesheet" href="http://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.css" />
+    <script src="js/underscore-min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/ejs.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/client.js" type="text/javascript" charset="utf-8"></script>
+    <!--<script src="js/event.js" type="text/javascript" charset="utf-8"></script>-->
+    <!--<script src="../js/tool.js" type="text/javascript" charset="utf-8"></script>-->
+    <!--<script src="../dynamic/js/client/data_table.js"></script>-->
+
+    <script src="lib/echarts-all.js"></script>
+    <script src="lib/jqueryui/jquery-ui.min.js"></script>
+
+
+</head>
+
+<body ontouchstart>
+
+<div class="mui-content" ><div data-id="FB0EB46E" class="FB0EB46E"><style>
+    .chart {
+        height: 200px;
+        margin: 0px;
+        padding: 0px;
+    }
+    h5 {
+        margin-top: 30px;
+        font-weight: bold;
+    }
+    h5:first-child {
+        margin-top: 15px;
+    }
+</style>
+    <div class="mui-content-padded">
+        <h5></h5>
+
+        <div class="chart" id="myChartRelation" _echarts_instance_="1568994930216" style="-webkit-tap-highlight-color: transparent; user-select: none; background-color: rgba(0, 0, 0, 0);"><div style="position: relative; overflow: hidden; width: 283px; height: 200px;"><div data-zr-dom-id="bg" class="zr-element" style="position: absolute; left: 0px; top: 0px; width: 283px; height: 200px; user-select: none;"></div><canvas width="283" height="200" data-zr-dom-id="0" class="zr-element" style="position: absolute; left: 0px; top: 0px; width: 283px; height: 200px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></canvas><canvas width="283" height="200" data-zr-dom-id="1" class="zr-element" style="position: absolute; left: 0px; top: 0px; width: 283px; height: 200px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></canvas><canvas width="283" height="200" data-zr-dom-id="_zrender_hover_" class="zr-element" style="position: absolute; left: 0px; top: 0px; width: 283px; height: 200px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></canvas></div></div>
+    </div>
+    <script>
+        var getOption = function (chartType) {
+            var
+                    option = {
+                        title : {
+                            text: '预算 vs 开销（Budget vs spending）',
+                            subtext: '纯属虚构'
+                        },
+                        tooltip : {
+                            trigger: 'axis'
+                        },
+                        legend: {
+                            orient : 'vertical',
+                            x : 'right',
+                            y : 'bottom',
+                            data:['预算分配（Allocated Budget）','实际开销（Actual Spending）']
+                        },
+//                    toolbox: {
+//                        show : true,
+//                        feature : {
+//                            mark : {show: true},
+//                            dataView : {show: true, readOnly: false},
+//                            restore : {show: true},
+//                            saveAsImage : {show: true}
+//                        }
+//                    },
+                        polar : [
+                            {
+                                indicator : [
+                                    { text: '销售（sales）', max: 6000},
+                                    { text: '管理（Administration）', max: 16000},
+                                    { text: '信息技术（Information Techology）', max: 30000},
+                                    { text: '客服（Customer Support）', max: 38000},
+                                    { text: '研发（Development）', max: 52000},
+                                    { text: '市场（Marketing）', max: 25000}
+                                ]
+                            }
+                        ],
+                        calculable : true,
+                        series : [
+                            {
+                                name: '预算 vs 开销（Budget vs spending）',
+                                type: 'radar',
+                                data : [
+                                    {
+                                        value : [4300, 10000, 28000, 35000, 50000, 19000],
+                                        name : '预算分配（Allocated Budget）'
+                                    },
+                                    {
+                                        value : [5000, 14000, 28000, 31000, 42000, 21000],
+                                        name : '实际开销（Actual Spending）'
+                                    }
+                                ]
+                            }
+                        ]
+                    };
+
+            return option;
+        };
+        var byId = function (id) {
+            return document.getElementById(id);
+        };
+        var myChartRelation = echarts.init(byId('myChartRelation'));
+        myChartRelation.setOption(getOption('bar'));
+        byId("myChartRelation").addEventListener('tap', function () {
+            var url = this.getAttribute('data-url');
+            if (window.plus) {
+                plus.runtime.openURL(url);
+            } else {
+                window.open(url);
+            }
+        }, false);
+    </script></div></div>
+
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+  <head>
+    <title></title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="lib/jqueryui/jquery-ui.min.css">
+    <!--<link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="css/zui.min.css">
+    <link rel="stylesheet" href="lib/calendar/zui.calendar.css">
+    <link rel="stylesheet" href="lib/datatable/zui.datatable.css">
+    <link rel="stylesheet" href="lib/datetimepicker/datetimepicker.css">
+    <link rel="stylesheet" href="lib/kindeditor/kindeditor.css">
+  </head>
+  <body>
+
+    <script src="lib/jquery/jquery.js"></script>
+    <script src="js/zui.min.js"></script>
+    <!--<script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>-->
+    <script src="js/underscore-min.js"></script>
+    <script src="lib/calendar/zui.calendar.min.js"></script>
+    <script src="lib/datatable/zui.datatable.js"></script>
+    <script src="lib/datetimepicker/datetimepicker.min.js"></script>
+    <script src="lib/kindeditor/kindeditor.min.js"></script>
+    <script src="lib/jqueryui/jquery-ui.min.js"></script>
+
+    <script src="lib/droppable/droppable.js"></script>
+    <style>
+
+      #multiDroppableContainer .btn-droppable {
+        cursor: move; /* 为被拖动的按钮更改光标类型 */
+      }
+      #multiDroppableContainer .area-name {
+        font-size: 50px;
+        line-height: 80px;
+        text-align: center;
+        color: #808080;
+      }
+    </style>
+
+    <div class="container-fluid">
+      <div class="row" >
+        <div class="col-xs-2" >
+          <div class="panel">
+            <div class="panel-heading">开始吧</div>
+            <div class="panel-body" style="height: 150px; text-align: center; line-height: 40px">
+              <button type="button" class="btn btn-primary multiDroppableContainer btn-droppable"><i class="icon icon-move"></i> 按钮 #<span class="btn-droppable-id">1</span></button><br>
+              <button type="button" class="btn btn-success multiDroppableContainer btn-droppable"><i class="icon icon-move"></i> 按钮 #<span class="btn-droppable-id">2</span></button><br>
+              <button type="button" class="btn btn-danger multiDroppableContainer  btn-droppable "><i class="icon icon-move"></i> 按钮 #<span class="btn-droppable-id">3</span></button>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-10">
+          <div class="col-sm-3">
+            <div class="panel droppable-target" data-id="1">
+              <div class="panel-heading">拖动到这里。</div>
+              <div class="panel-body" style="height: 150px">
+                <div class="area-name">A</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="panel droppable-target" data-id="2">
+              <div class="panel-heading">这里。</div>
+              <div class="panel-body" style="height: 150px">
+                <div class="area-name">B</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="panel droppable-target" data-id="3">
+              <div class="panel-heading">或这里。</div>
+              <div class="panel-body" style="height: 150px">
+                <div class="area-name">C</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      $('.multiDroppableContainer').droppable({
+        selector: '.btn-droppable', // 定义允许拖放的元素
+        target: '.droppable-target',
+        start: function() {
+          $('.multiDroppableContainer .droppable-target').removeClass('panel-warning').removeClass('panel-success').find('.panel-heading').text('拖动到这里吗？');
+        },
+        drop: function(event) {
+          var msg = '真棒！';
+          $('.multiDroppableContainer .droppable-target').removeClass('panel-success').removeClass('panel-warning');
+          if(event.target) {
+            var elementId = event.element.find('.btn-droppable-id').text();
+            event.target.addClass('panel-success').find('.panel-heading').text('成功将【按钮#' + elementId + '】拖到目的地。');
+            msg += '成功拖动【按钮#' + elementId + '】到区域 ' + event.target.find('.area-name').text();
+          }
+          $.zui.messager.show(msg);
+        },
+        drag: function(event) {
+          $('.multiDroppableContainer .droppable-target').removeClass('panel-success').removeClass('panel-warning');
+          if(event.target) event.target.addClass('panel-warning');
+        }
+      });
+    </script>
+  </body>
+</html>
