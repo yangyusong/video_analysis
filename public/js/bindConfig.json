@@ -1,0 +1,34 @@
+{
+  "bindType": "list",
+  "bindTypeContent": "",
+  "bindValue": "12",
+  "sid": "",
+  "buttonF8FDDCDB5084": {
+    "comp_name": "button",
+    "comp_id": "F8FDDCDB5084",
+    "binds": [
+      {
+        "field": "user",
+        "table_name": "user",
+        "type": "varchar(25)",
+        "prop_name": "text",
+        "comp_name": "button"
+      },
+      {
+        "field": "car_num",
+        "table_name": "capacity",
+        "type": "varchar(14)",
+        "prop_name": "text",
+        "comp_name": "button"
+      },
+      {
+        "field": "id",
+        "table_name": "capacity",
+        "type": "int(11)",
+        "prop_name": "href",
+        "comp_name": "button"
+      }
+    ]
+  },
+  "table_name": "capacity"
+}

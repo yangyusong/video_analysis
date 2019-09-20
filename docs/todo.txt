@@ -1,3 +1,5 @@
+http://localhost:1234/public/
+
 科技化
 
 需要中间服务
