@@ -1,6 +1,9 @@
 
 <script src='dist/echarts.js'></script>
 <script src='dist/echarts-liquidfill.js'></script>
+<script src="lib/jquery/jquery.js"></script>
+<script src="js/underscore-min.js"></script>
+<script src="js/client.js" type="text/javascript" charset="utf-8"></script>
 <style>
 
 
@@ -58,17 +61,17 @@
 <script>
     var _hmt = _hmt || [];
 
-
+    var atmData = {};
     var bgColor = '#E3F7FF';
     var containers = document.getElementsByClassName('chart');
     var options = [
         {
             series: [{
                 type: 'liquidFill',
-                data: [0.6, 0.5, 0.4, 0.3],
+                data: [0.6, 0.5, 0.4, 0.3],//注意第一个数据
                 radius: '70%',
                 label: {
-                    formatter: 'percent',
+                    formatter: '%',
                     fontSize: 25,
                     fontFamily: 'Lobster Two',
                     baseline: 'bottom',
@@ -111,15 +114,30 @@
     function update() {
         var data = [];
         var last = 1;
-        for (var i = 0; i < 4; ++i) {
-            last = Math.floor(last * (Math.random() * 0.5 + 0.5)
-                            * 100) / 100;
-            data.push(last);
+        var _id = localStorage.getItem("_id");
+
+        if(_.size(atmData) == 0 || atmData._id != _id)
+        {
+            client.get(client.devHost + "exist_data", {}, function(datas){
+                if(_.size(datas) > 0)
+                {
+                    console.log(datas);
+                    atmData = datas;
+                    for (var i = 0; i < 4; ++i) {
+                        last = Math.floor(datas.atm
+                                        ) / 100;
+                        data.push(last);
+                    }
+                    charts[0].setOption({
+                        series: [{
+                            data: data
+                        }]
+                    });
+//                datas = JSON.parse(datas);
+                }
+
+            });
         }
-        charts[0].setOption({
-            series: [{
-                data: data
-            }]
-        });
+
     }
 </script>

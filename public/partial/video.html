@@ -16,6 +16,40 @@
     </video>
 </div>
 
+<script>
+    function next(){
+        console.log("next");
+
+        var byId = function (id) {
+            return document.getElementById(id);
+        };
+        var _id = localStorage.getItem("_id");
+        if(!_id)
+        {
+            _id = 1;
+        }
+        else{
+            _id = parseInt(_id) + 1;
+        }
+        var chart_pie = echarts.init(byId('chart_pie'));
+        client.get(client.devHost + "data", {_id: _id}, function(result){
+//            console.log(result);
+            localStorage.setItem("_id", result._id);
+            localStorage.setItem("scene", JSON.stringify(result));
+            var dataScene = [];
+            for(var i in result.scene)
+            {
+                dataScene.push({value: result.scene[i][0], name: result.scene[i][1]});
+            }
+//            console.log(dataScene);
+            var op = getOptionPie('bar', dataScene);
+
+            chart_pie.setOption(op);
+        });
+
+    }
+</script>
+
 <div class="" style="margin-top: 5px">
     <button onclick="next()" class="btn btn-info btn_next" type="button">下一视频</button>
 </div>
@@ -231,23 +265,7 @@
 
             return option;
         };
-        var byId = function (id) {
-            return document.getElementById(id);
-        };
-        var chart_pie = echarts.init(byId('chart_pie'));
-        client.get(client.devHost + "data", {}, function(result){
-//            console.log(result);
-            localStorage.setItem("scene", JSON.stringify(result));
-            var dataScene = [];
-            for(var i in result.scene)
-            {
-                dataScene.push({value: result.scene[i][0], name: result.scene[i][1]});
-            }
-//            console.log(dataScene);
-            var op = getOptionPie('bar', dataScene);
 
-            chart_pie.setOption(op);
-        });
 
         byId("chart_pie").addEventListener('tap', function () {
             var url = this.getAttribute('data-url');
@@ -260,8 +278,3 @@
     </script>
 </div>
 
-<script>
-    function next(){
-        console.log("next");
-    }
-</script>

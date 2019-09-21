@@ -1,15 +1,46 @@
 <p >类型：<span class="desc_type"></span></p>
 <p >场景: <span class="desc_scene"></span></p>
 <p >人数: <span class="desc_people"></span></p>
+<p >安全: <span class="desc_safe"></span></p>
+<p >气氛: <span class="desc_atm"></span></p>
 
 <script>
-    var datas = localStorage.getItem("scene");
-    if(datas)
-    {
-        console.log(datas);
-        datas = JSON.parse(datas);
-        $(".desc_type").text(datas.type);
-        $(".desc_scene").text(datas.scene);
-        $(".desc_people").text(datas.people);
+    var analysisData = {};
+    function getDataAnalysis(){
+        if(resultHandler)
+        {
+            clearTimeout(resultHandler);
+        }
+        var _id = localStorage.getItem("_id");
+        if(_.size(analysisData) == 0 || analysisData._id != _id)
+        {
+            client.get(client.devHost + "exist_data", {}, function(datas){
+                if(_.size(datas) > 0)
+                {
+                    console.log(datas);
+                    analysisData = datas;
+//                datas = JSON.parse(datas);
+                    $(".desc_type").text(datas.type);
+                    $(".desc_scene").text(datas.scene_most);
+                    $(".desc_people").text(datas.people);
+                    $(".desc_safe").text(datas.safe);
+                    $(".desc_atm").text(datas.atm);
+                }
+                resultHandler = setTimeout(function(){
+                    getDataAnalysis();
+                }, 1000);
+
+            });
+        }
+        else{
+            resultHandler = setTimeout(function(){
+                getDataAnalysis();
+            }, 1000);
+        }
+
     }
+
+    var resultHandler = setTimeout(function(){
+        getDataAnalysis();
+    }, 1000);
 </script>

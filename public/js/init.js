@@ -2,6 +2,10 @@
  * Created by yys on 2019/9/21.
  */
 
+var byId = function (id) {
+    return document.getElementById(id);
+};
+
 $(function(){
     $(window).on('load', function() {
         var preLoder = $(".loader-wrapper");
