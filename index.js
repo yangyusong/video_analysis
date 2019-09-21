@@ -66,6 +66,13 @@ app.get('/get/data', function(req, res){
         "number|1-100": 1
     });
 
+    var tags = Mock.mock({
+        "array|1-2": ["no horizon", " man-made", "enclosed area", " cloth", "metal", "working", "plastic", " vertical components", "cluttered space"]
+    });
+
+    console.log("tags.array");
+    console.log(tags.array);
+
 
     var safeObj = Mock.mock({"number|0-100": 1});
     var atmObj = Mock.mock({"number|0-100": 1});
@@ -79,7 +86,7 @@ app.get('/get/data', function(req, res){
         "scene": scenes,
         "scene_most": scene_most[1],
         "people": peopleObj.number,
-        "tributes": ["no horizon", " man-made", "enclosed area", " cloth", "metal", "working", "plastic", " vertical components", "cluttered space"]
+        "tributes": _.uniq(tags.array)
     };
     res.json(contents);
 

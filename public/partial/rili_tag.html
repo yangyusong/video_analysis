@@ -25,9 +25,15 @@ echarts: 'lib/echart/'
     <div class="mui-content-padded ">
         <h5></h5>
 
-        <div class="chart" id="myChart" _echarts_instance_="1568982951108" style="-webkit-tap-highlight-color: transparent; user-select: none; background-color: rgba(0, 0, 0, 0);"><div style="position: relative; overflow: hidden; width: 300px; height: 200px;"><div data-zr-dom-id="bg" class="zr-element" style="position: absolute; left: 0px; top: 0px; width: 300px; height: 200px; user-select: none;"></div><canvas width="300" height="200" data-zr-dom-id="0" class="zr-element" style="position: absolute; left: 0px; top: 0px; width: 300px; height: 200px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></canvas><canvas width="300" height="200" data-zr-dom-id="1" class="zr-element" style="position: absolute; left: 0px; top: 0px; width: 300px; height: 200px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></canvas><canvas width="300" height="200" data-zr-dom-id="_zrender_hover_" class="zr-element" style="position: absolute; left: 0px; top: 0px; width: 300px; height: 200px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></canvas></div></div>
+        <div class="chart" id="tags_chart" _echarts_instance_="1568982951108" style="-webkit-tap-highlight-color: transparent; user-select: none; background-color: rgba(0, 0, 0, 0);"><div style="position: relative; overflow: hidden; width: 300px; height: 200px;"><div data-zr-dom-id="bg" class="zr-element" style="position: absolute; left: 0px; top: 0px; width: 300px; height: 200px; user-select: none;"></div><canvas width="300" height="200" data-zr-dom-id="0" class="zr-element" style="position: absolute; left: 0px; top: 0px; width: 300px; height: 200px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></canvas><canvas width="300" height="200" data-zr-dom-id="1" class="zr-element" style="position: absolute; left: 0px; top: 0px; width: 300px; height: 200px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></canvas><canvas width="300" height="200" data-zr-dom-id="_zrender_hover_" class="zr-element" style="position: absolute; left: 0px; top: 0px; width: 300px; height: 200px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></canvas></div></div>
     </div>
     <script>
+
+        var tagsData = {};
+
+        var byId = function (id) {
+            return document.getElementById(id);
+        };
         function createRandomItemStyle() {
             return {
                 normal: {
@@ -39,7 +45,10 @@ echarts: 'lib/echart/'
                 }
             };
         }
-        var getOption = function (datas) {
+        var getOptionTags = function (datas) {
+//            console.log("geto");
+//            console.log(datas);
+
             var tags = [];
             for(var i in datas.tributes)
             {
@@ -73,19 +82,46 @@ echarts: 'lib/echart/'
 
             return option;
         };
-        var byId = function (id) {
-            return document.getElementById(id);
-        };
-        var myChart = echarts.init(byId('myChart'));
-        var datas = localStorage.getItem("scene");
-        if(datas)
-        {
-            console.log(datas);
-            datas = JSON.parse(datas);
-            var op = getOption(datas);
-            myChart.setOption(op);
+
+        var tags_chart = echarts.init(byId('tags_chart'));
+
+        function getDataTags(){
+//            console.log("getDataTags");
+            if(tagsHandler)
+            {
+                clearTimeout(tagsHandler);
+            }
+            var _id = localStorage.getItem("_id");
+            if(_.size(tagsData) == 0 || tagsData._id != _id)
+            {
+                client.get(client.devHost + "exist_data", {}, function(datas){
+//                    console.log(datas);
+                    if(_.size(datas) > 0)
+                    {
+                        tagsData = datas;
+                        var op = getOptionTags(datas);
+                        tags_chart.setOption(op);
+//                datas = JSON.parse(datas);
+                    }
+                    tagsHandler = setTimeout(function(){
+                        getDataTags();
+                    }, 1000);
+
+                });
+            }
+            else{
+                tagsHandler = setTimeout(function(){
+                    getDataTags();
+                }, 1000);
+            }
+
         }
-        byId("myChart").addEventListener('tap', function () {
+
+        var tagsHandler = setTimeout(function(){
+            getDataTags();
+        }, 1000);
+
+        byId("tags_chart").addEventListener('tap', function () {
             var url = this.getAttribute('data-url');
             if (window.plus) {
                 plus.runtime.openURL(url);
