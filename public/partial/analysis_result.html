@@ -1,4 +1,15 @@
-<p>办公室场景</p>
-<p>安全指数：1</p>
-<p>行为分析：人们在娱乐</p>
-<table class="table"></table>
+<p >类型：<span class="desc_type"></span></p>
+<p >场景: <span class="desc_scene"></span></p>
+<p >人数: <span class="desc_people"></span></p>
+
+<script>
+    var datas = localStorage.getItem("scene");
+    if(datas)
+    {
+        console.log(datas);
+        datas = JSON.parse(datas);
+        $(".desc_type").text(datas.type);
+        $(".desc_scene").text(datas.scene);
+        $(".desc_people").text(datas.people);
+    }
+</script>

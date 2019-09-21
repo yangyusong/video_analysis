@@ -2,3 +2,23 @@ motion(情绪)
 happiness: [0,1] 越大越高兴
 px: [0,1] 越大越不高兴， 同时控制眼睛位置0左，1右
 py: [0,1] 控制眼睛位置0上，1下
+
+
+{
+ "TYPE": "indoor",
+ "SCENE": [
+  ["0.125", "pet_shop"],
+  ["0.060", "fire_station"],
+  ["0.051", "server_room"],
+  ["0.049", " toyshop"],
+  ["0.047 ", "beauty_salon"]
+ ],
+ "TRIBUTES": ["no horizon", " man-made", "enclosed area", " cloth", "metal", "working", "plastic", " vertical components", "cluttered space"]
+}
+
+
+{"tributes":"no horizon, man-made,enclosed area, cloth,metal,working,plastic, vertical components,cluttered space",
+"type":"indoor",
+"people":"3",
+"scene":"shop"
+}

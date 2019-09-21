@@ -49,6 +49,10 @@ footer a {
     background-color: #193dc0;
 }
 
+.panel-group{
+    margin-bottom: 0;
+}
+
 
 /*START LOADER DESIGN*/
 #loader-wrapper {

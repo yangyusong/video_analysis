@@ -1,6 +1,7 @@
 <style type="text/css">
     .main-wrap{
         margin: 0 auto;
+        margin-top: -5px;
         min-width: 320px;
         max-width: 640px;
     }
@@ -9,8 +10,258 @@
         width: 100%;
     }
 </style>
-<div class="remove_node ui_cell A3129B557FD3">
+<div class="main-wrap">
     <video width="100%" controls="">
         <source src="video/movie.ogg" type="video/ogg" />
     </video>
 </div>
+
+<div class="" style="margin-top: 5px">
+    <button onclick="next()" class="btn btn-info btn_next" type="button">下一视频</button>
+</div>
+
+
+<div style="width:380px;margin-left: 320px;margin-top:-210px;height: 220px;opacity: 0.6;z-index: 100" class="alert alert-warning alert-dismissable">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+    <!--<script src="lib/zrender.min.js"></script>-->
+    <!--<script src="asset/js/esl/esl.js"></script>-->
+    <script src="lib/echarts.all.js"></script>
+    <script>
+        //    require.config({
+        //        paths: {
+        //            echarts: 'lib/echart/'
+        //        }
+        //    });
+    </script>
+    <style>
+        .chart_pie {
+            height: 170px;
+            margin: 0px;
+            padding: 0px;
+        }
+        h5 {
+            margin-top: 30px;
+            font-weight: bold;
+        }
+        h5:first-child {
+            margin-top: 15px;
+        }
+    </style>
+    <div class="">
+
+        <div class="chart_pie" id="chart_pie"></div>
+    </div>
+    <script>
+        var getOptionPie = function (chartType, dataScene) {
+//            console.log("dataScene");
+//            console.log(dataScene);
+            var types = _.map(dataScene, function(item){return item.name});
+//            console.log(types);
+            var option = {
+            backgroundColor:"#0B1837",
+            color: ["#EAEA26", "#906BF9", "#FE5656", "#01E17E", "#3DD1F9", "#FFAD05"],
+            // title: {
+            //     text: '网络/安全设备',
+            //     left: '60',
+            //     top: 0,
+            //     textAlign: 'center',
+            //     textStyle: {
+            //         color: '#fff',
+            //         fontSize: 14,
+            //         fontWeight: 0
+            //     }
+            // },
+            grid: {
+                left: -100,
+                top: 50,
+                bottom: 10,
+                right: 10,
+                containLabel: true
+            },
+            tooltip: {
+                trigger: 'item',
+                formatter: "{b} : {c} ({d}%)"
+            },
+            legend: {
+                type: "scroll",
+                orient: "vartical",
+                // x: "right",
+                top: "center",
+                right: "15",
+                // bottom: "0%",
+                itemWidth: 16,
+                itemHeight: 8,
+                itemGap: 16,
+                textStyle: {
+                    color: '#A3E2F4',
+                    fontSize: 12,
+                    fontWeight: 0
+                },
+                data: types
+            },
+            polar: {},
+            angleAxis: {
+                interval: 1,
+                type: 'category',
+                data: [],
+                z: 10,
+                axisLine: {
+                    show: false,
+                    lineStyle: {
+                        color: "#0B4A6B",
+                        width: 1,
+                        type: "solid"
+                    },
+                },
+                axisLabel: {
+                    interval: 0,
+                    show: true,
+                    color: "#0B4A6B",
+                    margin: 8,
+                    fontSize: 16
+                },
+            },
+            radiusAxis: {
+                min: 40,
+                max: 120,
+                interval: 20,
+                axisLine: {
+                    show: false,
+                    lineStyle: {
+                        color: "#0B3E5E",
+                        width: 1,
+                        type: "solid"
+                    },
+                },
+                axisLabel: {
+                    formatter: '{value} %',
+                    show: false,
+                    padding: [0, 0, 20, 0],
+                    color: "#0B3E5E",
+                    fontSize: 16
+                },
+                splitLine: {
+                    lineStyle: {
+                        color: "#0B3E5E",
+                        width: 2,
+                        type: "solid"
+                    }
+                }
+            },
+            calculable: true,
+            series: [{
+                type: 'pie',
+                radius: ["5%", "10%"],
+                hoverAnimation: false,
+                labelLine: {
+                    normal: {
+                        show: false,
+                        length: 30,
+                        length2: 55
+                    },
+                    emphasis: {
+                        show: false
+                    }
+                },
+                data: [{
+                    name: '',
+                    value: 0,
+                    itemStyle: {
+                        normal: {
+                            color: "#0B4A6B"
+                        }
+                    }
+                }]
+            }, {
+                type: 'pie',
+                radius: ["90%", "95%"],
+                hoverAnimation: false,
+                labelLine: {
+                    normal: {
+                        show: false,
+                        length: 30,
+                        length2: 55
+                    },
+                    emphasis: {
+                        show: false
+                    }
+                },
+                name: "",
+                data: [{
+                    name: '',
+                    value: 0,
+                    itemStyle: {
+                        normal: {
+                            color: "#0B4A6B"
+                        }
+                    }
+                }]
+            },{
+                stack: 'a',
+                type: 'pie',
+                radius: ['20%', '80%'],
+                roseType: 'area',
+                zlevel:10,
+                label: {
+                    normal: {
+                        show: true,
+                        formatter: "{c}",
+                        textStyle: {
+                            fontSize: 12,
+                        },
+                        position: 'outside'
+                    },
+                    emphasis: {
+                        show: true
+                    }
+                },
+                labelLine: {
+                    normal: {
+                        show: true,
+                        length: 20,
+                        length2: 55
+                    },
+                    emphasis: {
+                        show: false
+                    }
+                },
+                data: dataScene
+            }, ]
+        }
+
+            return option;
+        };
+        var byId = function (id) {
+            return document.getElementById(id);
+        };
+        var chart_pie = echarts.init(byId('chart_pie'));
+        client.get(client.devHost + "data", {}, function(result){
+//            console.log(result);
+            localStorage.setItem("scene", JSON.stringify(result));
+            var dataScene = [];
+            for(var i in result.scene)
+            {
+                dataScene.push({value: result.scene[i][0], name: result.scene[i][1]});
+            }
+//            console.log(dataScene);
+            var op = getOptionPie('bar', dataScene);
+
+            chart_pie.setOption(op);
+        });
+
+        byId("chart_pie").addEventListener('tap', function () {
+            var url = this.getAttribute('data-url');
+            if (window.plus) {
+                plus.runtime.openURL(url);
+            } else {
+                window.open(url);
+            }
+        }, false);
+    </script>
+</div>
+
+<script>
+    function next(){
+        console.log("next");
+    }
+</script>

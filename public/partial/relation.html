@@ -22,7 +22,7 @@
     <!--<script src="../js/tool.js" type="text/javascript" charset="utf-8"></script>-->
     <!--<script src="../dynamic/js/client/data_table.js"></script>-->
 
-    <script src="lib/echarts-all.js"></script>
+    <script src="lib/echarts.all.js"></script>
     <script src="lib/jqueryui/jquery-ui.min.js"></script>
 
 
@@ -50,9 +50,8 @@
         <div class="chart" id="myChartRelation" _echarts_instance_="1568994930216" style="-webkit-tap-highlight-color: transparent; user-select: none; background-color: rgba(0, 0, 0, 0);"><div style="position: relative; overflow: hidden; width: 283px; height: 200px;"><div data-zr-dom-id="bg" class="zr-element" style="position: absolute; left: 0px; top: 0px; width: 283px; height: 200px; user-select: none;"></div><canvas width="283" height="200" data-zr-dom-id="0" class="zr-element" style="position: absolute; left: 0px; top: 0px; width: 283px; height: 200px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></canvas><canvas width="283" height="200" data-zr-dom-id="1" class="zr-element" style="position: absolute; left: 0px; top: 0px; width: 283px; height: 200px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></canvas><canvas width="283" height="200" data-zr-dom-id="_zrender_hover_" class="zr-element" style="position: absolute; left: 0px; top: 0px; width: 283px; height: 200px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></canvas></div></div>
     </div>
     <script>
-        var getOption = function (chartType) {
-            var
-                    option = {
+        var getOption = function (chartType, datas) {
+            var option = {
                         title : {
                             text: '预算 vs 开销（Budget vs spending）',
                             subtext: '纯属虚构'
@@ -112,7 +111,14 @@
             return document.getElementById(id);
         };
         var myChartRelation = echarts.init(byId('myChartRelation'));
-        myChartRelation.setOption(getOption('bar'));
+        var datas = localStorage.getItem("scene");
+        if(datas)
+        {
+            datas = JSON.parse(datas);
+            var op = getOption('bar', datas);
+            myChartRelation.setOption(op);
+        }
+
         byId("myChartRelation").addEventListener('tap', function () {
             var url = this.getAttribute('data-url');
             if (window.plus) {
