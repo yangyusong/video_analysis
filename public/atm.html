@@ -109,18 +109,22 @@
         }
     };
 
-    setInterval(update, 3000);
+    setInterval(update, 800);
 
     function update() {
         var data = [];
         var last = 1;
-        var _id = localStorage.getItem("_id");
+//        var _id = localStorage.getItem("_id");
 
-        if(_.size(atmData) == 0 || atmData._id != _id)
+//        if(_.size(atmData) == 0 || atmData._id != _id)
+        if(true )
         {
-            client.get(client.devHost + "exist_data", {}, function(datas){
+            client.get(client.devHost + client.exist, {}, function(datas){
+                console.log("atm");
+                console.log(datas);
                 if(_.size(datas) > 0)
                 {
+                    console.log("atm");
                     console.log(datas);
                     atmData = datas;
                     for (var i = 0; i < 4; ++i) {
@@ -130,7 +134,14 @@
                     }
                     charts[0].setOption({
                         series: [{
-                            data: data
+                            data: data,
+                            label: {
+                                formatter: "" + datas.atm + '%',
+                                fontSize: 25,
+                                fontFamily: 'Lobster Two',
+                                baseline: 'bottom',
+                                position: ['50%', '86%']
+                            }
                         }]
                     });
 //                datas = JSON.parse(datas);

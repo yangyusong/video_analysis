@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1 user-scalable=0"/>
+    <link rel="shortcut icon" href="img/logo.png">
+    <title></title>
+    <style>
+        *{ margin: 0; padding:0;}
+        body{-webkit-tap-highlight-color: rgba(0,0,0,0); font-family: "微软雅黑"}
+        h1{ width: 100%; font-size: 1.5em; text-align: center; line-height: 3em; color:#47c9af; }
+        #audio_mr{ width: 100%;}
+        #control{ width: 150px; height: 150px; line-height: 150px; text-align: center; border-radius: 200px; border:none; color:#fff; margin-top: -75px; margin-left:-75px; left:50%; top:50%; position: absolute; box-shadow: #888 0 0 8px;}
+        /*时间样式*/
+    </style>
+
+    <script src="../public/lib/jquery/jquery.js"></script>
+</head>
+
+<body>
+
+
+
+<!--audio_mrstart-->
+<audio_mr id="audio_mr" src="yundongchang.mp3"  loop="loop" autoplay_mr="autoplay" ></audio_mr>
+<!--audio_mr End-->
+
+<!--播放控制按钮start-->
+<button id="control" class="">loading</button>
+<!--播放控制按钮end-->
+
+<script>
+    //    $(function() {
+    //        getSong();
+    //    })
+
+
+    //    function getSong() {
+    //        audio_mr = document.getElementById("audio_mr");
+    //        audio_mr.src = "yundongchang.mp3";
+    //        audio_mr.loop = true; //歌曲循环
+    //        audio_mr.addEventListener("loadeddata", //歌曲一经完整的加载完毕( 也可以写成上面提到的那些事件类型)
+    //                function() {
+    //                    console.log("load");
+    //                    clicks(audio_mr);
+    //                }, false);
+    //
+    //    }
+
+    var play_mr = false;
+    //获取歌曲链接并插入dom中
+    var audio_mr = null;
+    audio_mr = document.getElementById("audio_mr");
+    audio_mr.addEventListener("canplay", function(){
+        console.log("canplay");
+        setTimeout(function(){
+            clicks();
+        }, 1000);
+    });
+
+    //点击播放/暂停
+    function clicks() {
+        console.log(audio_mr);
+        if(play_mr)
+        {
+            play_mr = false;
+            audio_mr.pause();
+        }
+        else{
+            try{
+                audio_mr.play();
+                play_mr = true;
+            }catch(e){
+                setTimeout(function(){
+                    clicks();
+                }, 1000);
+            }
+        }
+    }
+
+</script>
+</body>
+</html>

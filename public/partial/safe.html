@@ -105,7 +105,7 @@
 
             timeTicket = setInterval(function () {
                 getData(option);
-            }, 2000);
+            }, 300);
 
             return option;
         };
@@ -125,7 +125,7 @@
         }, false);
 
         function getData(option){
-            client.get(client.devHost + "exist_data", {}, function(result){
+            client.get(client.devHost + client.exist, {}, function(result){
                 if(_.size(result) > 0)
                 {
 //                    option.series[0].data[0].value = (Math.random() * 100).toFixed(2) - 0;

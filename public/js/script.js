@@ -42,10 +42,11 @@ function onMouseLeave() {
 
 function update() {
 
-	var _id = localStorage.getItem("_id");
-	if(_.size(motionData) == 0 || motionData._id != _id)
+	//var _id = localStorage.getItem("_id");
+	//if(_.size(motionData) == 0 || motionData._id != _id)
+	if(true)
 	{
-		client.get(client.devHost + "exist_data", {}, function(datas){
+		client.get(client.devHost + client.exist, {}, function(datas){
 //                    console.log(datas);
 			if(_.size(datas) > 0)
 			{

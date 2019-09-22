@@ -54,7 +54,7 @@ echarts: 'lib/echart/'
             {
                 tags.push({
                     name: datas.tributes[i],
-                    value: 1386,
+                    value: 1486,
                     itemStyle: createRandomItemStyle()
                 });
             }
@@ -91,10 +91,11 @@ echarts: 'lib/echart/'
             {
                 clearTimeout(tagsHandler);
             }
-            var _id = localStorage.getItem("_id");
-            if(_.size(tagsData) == 0 || tagsData._id != _id)
+//            var _id = localStorage.getItem("_id");
+//            if(_.size(tagsData) == 0 || tagsData._id != _id)
+            if(true)
             {
-                client.get(client.devHost + "exist_data", {}, function(datas){
+                client.get(client.devHost + client.exist, {}, function(datas){
 //                    console.log(datas);
                     if(_.size(datas) > 0)
                     {
@@ -105,21 +106,21 @@ echarts: 'lib/echart/'
                     }
                     tagsHandler = setTimeout(function(){
                         getDataTags();
-                    }, 1000);
+                    }, 2000);
 
                 });
             }
             else{
                 tagsHandler = setTimeout(function(){
                     getDataTags();
-                }, 1000);
+                }, 300);
             }
 
         }
 
         var tagsHandler = setTimeout(function(){
             getDataTags();
-        }, 1000);
+        }, 300);
 
         byId("tags_chart").addEventListener('tap', function () {
             var url = this.getAttribute('data-url');

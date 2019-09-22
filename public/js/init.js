@@ -2,6 +2,8 @@
  * Created by yys on 2019/9/21.
  */
 
+var currentMusic = "";
+
 var byId = function (id) {
     return document.getElementById(id);
 };
@@ -223,4 +225,128 @@ $(function(){
 
 });
 
+var wHeight = $(window).height();
+$(".left_video").css("height",  "" + wHeight + "px");
+$(".h_per30").css("height",  "" + (wHeight * 35 / 100) + "px");
+
+setTimeout(function(){
+    $(".left_video").css("height",  "" + wHeight + "px");
+    $(".h_per30").css("height",  "" + (wHeight * 35 / 100) + "px");
+    $(".h_per38").css("height",  "" + (wHeight * 39 / 100) + "px");
+}, 1200);
+
+
+//------------音乐
+
+var play_mr = false;
+//获取歌曲链接并插入dom中
+var audio_mr = null;
+audio_mr = document.getElementById("audio_mr");
+//audio_mr.addEventListener("canplay", function(){
+//    console.log("canplay");
+//    setTimeout(function(){
+//        clicks_mr();
+//    }, 1000);
+//});
+
+function playMr(){
+    pauseAll();
+    audio_mr.play();
+    play_mr = true;
+}
+
+function playNew(){
+    pauseAll();
+    audio_new.play();
+    play_new = true;
+}
+
+function playYourName(){
+    pauseAll();
+    audio_yourname.play();
+    play_yourname = true;
+}
+
+//点击播放/暂停
+function clicks_mr() {
+    console.log(audio_mr);
+    pauseAll();
+    if(!play_mr)
+    {
+        try{
+            audio_mr.play();
+            play_mr = true;
+        }catch(e){
+            setTimeout(function(){
+                clicks_mr();
+            }, 1000);
+        }
+    }
+}
+
+
+var play_new = false;
+//获取歌曲链接并插入dom中
+var audio_new = null;
+audio_new = document.getElementById("audio_new");
+//audio_new.addEventListener("canplay", function(){
+//    console.log("canplay");
+//    setTimeout(function(){
+//        clicks_new();
+//    }, 1000);
+//});
+
+//点击播放/暂停
+function clicks_new() {
+    console.log(audio_new);
+    pauseAll();
+    if(!play_new)
+    {
+        try{
+            audio_new.play();
+            play_new = true;
+        }catch(e){
+            setTimeout(function(){
+                clicks_new();
+            }, 1000);
+        }
+    }
+}
+
+var play_yourname = false;
+//获取歌曲链接并插入dom中
+var audio_yourname = null;
+audio_yourname = document.getElementById("audio_yourname");
+//audio_yourname.addEventListener("canplay", function(){
+//    console.log("canplay");
+//    setTimeout(function(){
+//        clicks_yourname();
+//    }, 1000);
+//});
+
+//点击播放/暂停
+function clicks_yourname() {
+    console.log(audio_yourname);
+    pauseAll();
+    if(!play_yourname)
+    {
+        try{
+            audio_yourname.play();
+            play_yourname = true;
+        }catch(e){
+            setTimeout(function(){
+                clicks_yourname();
+            }, 1000);
+        }
+    }
+}
+
+function pauseAll(){
+    play_mr = false;
+    play_new = false;
+    play_yourname = false;
+    audio_mr.pause();
+    audio_new.pause();
+    audio_yourname.pause();
+}
 

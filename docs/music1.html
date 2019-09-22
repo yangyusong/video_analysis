@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1 user-scalable=0"/>
+    <link rel="shortcut icon" href="img/logo.png">
+    <title></title>
+    <style>
+        *{ margin: 0; padding:0;}
+        body{-webkit-tap-highlight-color: rgba(0,0,0,0); font-family: "微软雅黑"}
+        h1{ width: 100%; font-size: 1.5em; text-align: center; line-height: 3em; color:#47c9af; }
+        #audio{ width: 100%;}
+        #control{ width: 150px; height: 150px; line-height: 150px; text-align: center; border-radius: 200px; border:none; color:#fff; margin-top: -75px; margin-left:-75px; left:50%; top:50%; position: absolute; box-shadow: #888 0 0 8px;}
+        /*时间样式*/
+    </style>
+
+    <script src="../public/lib/jquery/jquery.js"></script>
+</head>
+
+<body>
+<script>
+    $(function() {
+        getSong();
+    })
+
+    //获取歌曲链接并插入dom中
+    function getSong() {
+        var audio = document.getElementById("audio");
+        audio.src = "yundongchang.mp3";
+        audio.loop = true; //歌曲循环
+        playCotrol(); //播放控制函数
+
+    }
+
+    //点击播放/暂停
+    function clicks() {
+        var audio = document.getElementById("audio");
+        $("#control").click(function() {
+            if ($("#control").hasClass("play")) {
+                $("#control").addClass("pause").removeClass("play");
+                audio.play();//开始播放
+            } else {
+                $("#control").addClass("play").removeClass("pause");
+                audio.pause();
+            }
+        })
+    }
+
+
+    //播放事件监听
+    function playCotrol() {
+        audio.addEventListener("loadeddata", //歌曲一经完整的加载完毕( 也可以写成上面提到的那些事件类型)
+                function() {
+                    $("#control").addClass("play").removeClass("color_gray");
+//
+                    clicks();
+                }, false);
+
+        audio.addEventListener("pause",
+                function() { //监听暂停
+                    $("#control").addClass("play").removeClass("pause");
+                    if (audio.currentTime == audio.duration) {
+                        audio.stop();
+                        audio.currentTime = 0;
+                    }
+                }, false);
+        audio.addEventListener("play",
+                function() { //监听暂停
+                    $("#control").addClass("pause").removeClass("play");
+                }, false);
+        audio.addEventListener("ended", function() {
+        }, false)
+    }
+
+</script>
+
+<h1></h1>
+
+<!--audiostart-->
+<audio id="audio" src=""  loop="loop" autoplay="autoplay" ></audio>
+<!--audio End-->
+
+<!--播放控制按钮start-->
+<button id="control" class="">loading</button>
+<!--播放控制按钮end-->
+
+
+</body>
+</html>

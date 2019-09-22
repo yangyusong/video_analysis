@@ -3,10 +3,27 @@
  */
 var client = {};
 
-client.devHost = "http://localhost:1234/get/";//开发中 等待服务器先上线才能改
-client.defaultHost = "http://localhost:1234/get/";
+client.online = true;
+client.devHost = "http://localhost:3100/get/";//开发中 等待服务器先上线才能改
+client.defaultHost = "http://localhost:3100/get/";
+if(client.online)
+{
+    client.devHost = "http://192.168.13.180:3100/get/";//开发中 等待服务器先上线才能改
+    client.defaultHost = "http://192.168.13.180:3100/get/";
+}
+
 client.host = client.devHost;
 client.debug = false;
+client.demoData = false;
+//client.demoData = true;
+client.mid = "mid";
+client.exist = "exist_data";
+client.newData = "data";
+if(!client.demoData)
+{
+    client.exist = client.mid;
+    client.newData = client.mid;
+}
 client.data = {};
 
 if(client.debug)

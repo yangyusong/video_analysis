@@ -1,46 +1,77 @@
 <p >类型：<span class="desc_type"></span></p>
 <p >场景: <span class="desc_scene"></span></p>
 <p >人数: <span class="desc_people"></span></p>
-<p >安全: <span class="desc_safe"></span></p>
+<!--<p >安全: <span class="desc_safe"></span></p>-->
 <p >气氛: <span class="desc_atm"></span></p>
 
 <script>
     var analysisData = {};
     function getDataAnalysis(){
+        console.log("getDataAnalysis");
         if(resultHandler)
         {
             clearTimeout(resultHandler);
         }
-        var _id = localStorage.getItem("_id");
-        if(_.size(analysisData) == 0 || analysisData._id != _id)
+//        var _id = localStorage.getItem("_id");
+//        if(_.size(analysisData) == 0 || analysisData._id != _id)
+        if(true)
         {
-            client.get(client.devHost + "exist_data", {}, function(datas){
+            client.get(client.devHost + client.exist, {}, function(datas){
                 if(_.size(datas) > 0)
                 {
+                    console.log("music");
                     console.log(datas);
                     analysisData = datas;
+
+                    if(datas.music == "new.wav")
+                    {
+                        if(currentMusic != datas.music)
+                        {
+                            playNew();
+                        }
+                    }
+                    else if(datas.music == "mr.mp3")
+                    {
+                        if(currentMusic != datas.music)
+                        {
+                            playMr();
+                        }
+                    }
+                    else if(datas.music == "yourname.mp3")
+                    {
+                        if(currentMusic != datas.music)
+                        {
+                            playYourName();
+                        }
+                    }
 //                datas = JSON.parse(datas);
                     $(".desc_type").text(datas.type);
                     $(".desc_scene").text(datas.scene_most);
                     $(".desc_people").text(datas.people);
-                    $(".desc_safe").text(datas.safe);
+//                    $(".desc_safe").text(datas.safe);
                     $(".desc_atm").text(datas.atm);
+                    if(parseInt(datas.safe) > 80)
+                    {
+                        var msg = new $.zui.Messager("<p style='color: red'>安全警告，当前场景可能存在危险</p>", {placement: 'top'});
+                        // 显示消息
+                        msg.show();
+                    }
                 }
                 resultHandler = setTimeout(function(){
                     getDataAnalysis();
-                }, 1000);
+                }, 800);
 
             });
         }
         else{
             resultHandler = setTimeout(function(){
                 getDataAnalysis();
-            }, 1000);
+            }, 300);
         }
 
     }
 
     var resultHandler = setTimeout(function(){
         getDataAnalysis();
-    }, 1000);
+    }, 300);
 </script>

@@ -54,6 +54,10 @@ footer a {
 }
 
 
+.h_per30{
+    height: 30%;
+}
+
 /*START LOADER DESIGN*/
 #loader-wrapper {
     position: fixed;
