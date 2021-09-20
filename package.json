@@ -22,7 +22,7 @@
     "rd": "^2.0.1",
     "request": "^2.88.0",
     "underscore": "^1.9.1",
-    "zrender": "^4.1.0"
+    "zrender": "^5.2.1"
   },
   "devDependencies": {
     "connect-multiparty": "^2.2.0"
